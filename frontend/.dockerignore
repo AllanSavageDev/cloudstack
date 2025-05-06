@@ -1,0 +1,9 @@
+node_modules
+.next
+dist
+.DS_Store
+
+# Ignore local config
+.env
+.vscode
+*.log
