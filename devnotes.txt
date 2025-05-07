@@ -1,0 +1,5 @@
+ => [frontend 4/6] RUN npm install --omit=dev   
+
+ this shit is back again ... 
+
+ 

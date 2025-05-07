@@ -7,6 +7,8 @@
   <img src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens" />
 </p>
 
+---
+
 [![Build](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/allansavage/cloudstack)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://github.com/allansavage/cloudstack/blob/main/LICENSE)
 [![Dockerized](https://img.shields.io/badge/docker-ready-blue)](https://github.com/allansavage/cloudstack#-full-docker-setup-production)

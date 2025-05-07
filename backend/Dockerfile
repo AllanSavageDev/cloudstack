@@ -19,7 +19,7 @@ COPY . .
 # CMD ["sleep", "infinity"]
 # CMD ["bash", "script.sh"]
 #CMD ["uvicorn", "service:app", "--host", "0.0.0.0", "--port", "5000"]
-CMD ["uvicorn", "service:app", "--host", "0.0.0.0", "--port", "5000", "--root-path", "/api"]
+CMD ["uvicorn", "demo:app", "--host", "0.0.0.0", "--port", "5000", "--root-path", "/api"]
 
 
 

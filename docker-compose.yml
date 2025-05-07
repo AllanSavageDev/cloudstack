@@ -24,14 +24,15 @@ services:
     working_dir: /app
     tty: true
     ports:
-      - "5000:5000"
+      - "5050:5000"
     environment:
       - DB_NAME=cloudstack
       - DB_USER=postgres
       - DB_PASSWORD=secret
       - DB_HOST=db
-      - DB_PORT=5435
+      - DB_PORT=5432
       - CS_ENV=prod  # optional custom environment flag (CS==CloudStack for reference)
+
 
   frontend:
     build:
@@ -46,7 +47,8 @@ services:
       - backend
 
   nginx:
-    image: nginx
+#    image: nginx
+    image: nginx:1.27
     container_name: cloudstack-nginx
     ports:
       - "80:80"

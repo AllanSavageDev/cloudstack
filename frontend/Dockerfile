@@ -1,21 +1,16 @@
-# Use official Node image
-FROM node:20-alpine
+# frontend/Dockerfile
+#FROM node:20-alpine
+FROM node:20-slim
 
-# Set working directory
 WORKDIR /app
 
-# Install dependencies
-COPY package.json package-lock.json ./
-RUN npm ci 
+COPY package*.json ./
+#RUN npm install --omit=dev
+RUN npm install 
 
-# Copy source
 COPY . .
 
-# Build app
 RUN npm run build
 
-# Expose default Next.js port
 EXPOSE 3000
-
-# Run in production mode
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]

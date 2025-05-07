@@ -28,22 +28,39 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# def get_connection():
+
+#     print("Connecting to DB with settings:")
+#     print("DB_NAME =", os.getenv("DB_NAME", "cloudstack"))
+#     print("DB_USER =", os.getenv("DB_USER", "postgres"))
+#     print("DB_PASSWORD =", os.getenv("DB_PASSWORD", "secret"))
+#     print("DB_HOST =", os.getenv("DB_HOST", "db"))
+#     print("DB_PORT =", os.getenv("DB_PORT", 5432))
+
+#     return psycopg2.connect(
+#         dbname=os.getenv("DB_NAME", "cloudstack"),
+#         user=os.getenv("DB_USER", "postgres"),
+#         password=os.getenv("DB_PASSWORD", "secret"),
+#         host=os.getenv("DB_HOST", "db"),
+#         port=int(os.getenv("DB_PORT", 5432))
+#     )
+
+import time
 def get_connection():
+    for _ in range(10):
+        try:
+            return psycopg2.connect(
+                dbname=os.getenv("DB_NAME", "cloudstack"),
+                user=os.getenv("DB_USER", "postgres"),
+                password=os.getenv("DB_PASSWORD", "secret"),
+                host=os.getenv("DB_HOST", "db"),
+                port=os.getenv("DB_PORT", 5432)
+            )
+        except psycopg2.OperationalError:
+            print("DB not ready yet, retrying...")
+            time.sleep(2)
+    raise Exception("DB connection failed after multiple retries")
 
-    print("Connecting to DB with settings:")
-    print("DB_NAME =", os.getenv("DB_NAME", "cloudstack"))
-    print("DB_USER =", os.getenv("DB_USER", "postgres"))
-    print("DB_PASSWORD =", os.getenv("DB_PASSWORD", "secret"))
-    print("DB_HOST =", os.getenv("DB_HOST", "db"))
-    print("DB_PORT =", os.getenv("DB_PORT", 5432))
-
-    return psycopg2.connect(
-        dbname=os.getenv("DB_NAME", "cloudstack"),
-        user=os.getenv("DB_USER", "postgres"),
-        password=os.getenv("DB_PASSWORD", "secret"),
-        host=os.getenv("DB_HOST", "db"),
-        port=int(os.getenv("DB_PORT", 5432))
-    )
 
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
